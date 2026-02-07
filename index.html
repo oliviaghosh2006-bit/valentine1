@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OliVeer 🤍</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+/* ========== DREAMY ANIMATED BACKGROUND (#1) ========== */
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 214, 234, 0.9), transparent 55%),
+    radial-gradient(circle at 90% 80%, rgba(234, 240, 255, 0.9), transparent 55%),
+    linear-gradient(180deg, #fff3f8, #ffd6ea, #ffe6f2);
+
+  animation: dreamyMove 12s ease-in-out infinite alternate;
+  font-family:'Playfair Display',serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* subtle moving glow */
+@keyframes dreamyMove{
+  0%{background-position:0% 50%;}
+  100%{background-position:100% 50%;}
+}
+
+/* floating light orbs */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,160,180,.15) 2px, transparent 3px),
+    radial-gradient(circle at 70% 60%, rgba(255,120,160,.12) 2px, transparent 3px);
+  animation: sparkle 6s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+
+@keyframes sparkle{
+  from{opacity:.6;}
+  to{opacity:1;}
+}
+#noBtn{
+  transition: all 0.15s ease;
+}
+
+/* ===== LAYOUT ===== */
+.section{
+  display:none;
+  text-align:center;
+  max-width:720px;
+  padding:20px;
+  animation:fade 0.6s ease;
+}
+
+.section.active{display:block;}
+
+h1{
+  color:#4b2c3f;
+  font-size:26px;
+  margin-bottom:8px;
+}
+
+.romantic{
+  font-family:'Great Vibes',cursive;
+  font-size:48px;
+  color:#a83263;
+}
+
+/* ===== PREMIUM BUTTONS (#8) ===== */
+button{
+  padding:12px 30px;
+  font-size:18px;
+  border-radius:30px;
+  border:none;
+  background:linear-gradient(135deg,#ff7aa2,#ff9bb8);
+  color:white;
+  cursor:pointer;
+  margin:10px;
+  box-shadow:0 0 12px rgba(255,120,160,.5);
+  transition:.2s ease;
+}
+
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 18px rgba(255,120,160,.8);
+}
+
+button:active{
+  transform:scale(.97);
+}
+
+button.secondary{
+  background:#b0b0b0;
+}
+
+/* images */
+img{
+  max-width:100%;
+  max-height:40vh;
+  object-fit:contain;
+  border-radius:20px;
+  margin-top:12px;
+}
+
+/* GIF styling */
+.gif{
+  max-height:140px;
+  margin:8px auto;
+}
+
+/* ===== BETTER CELEBRATION (#7) ===== */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  pointer-events:none;
+  animation:float 6s linear forwards;
+  opacity:0.9;
+  z-index:9999;
+}
+
+@keyframes float{
+  to{transform:translateY(-110vh); opacity:0;}
+}
+
+.petals{
+  position:fixed;
+  top:-10px;
+  font-size:22px;
+  animation:petalFall 6s linear forwards;
+  z-index:9998;
+}
+
+@keyframes petalFall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+@keyframes confettiFall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== MUSIC WITH FADE-IN (#3) ===== -->
+<audio id="song" src="sitaare.mp3" loop></audio>
+
+<!-- 1 -->
+<div class="section active" id="s1">
+  <h1>Hey boy, i have something to confess!!!!</h1>
+  <img class="gif" src="gifs/shy.gif">
+  <button onclick="go(2)">ok say</button>
+</div>
+
+<!-- 2 -->
+<div class="section" id="s2">
+  <h1>I had a huge crush on you since day 1 and wanted to approach you since that day</h1>
+  <img class="gif" src="gifs/blush.gif">
+  <button onclick="go(3)">proceed mam</button>
+</div>
+
+<!-- 3 -->
+<div class="section" id="s3">
+  <h1>Will you be my valentine??🥺🥺</h1>
+  <img class="gif" src="gifs/plead.gif">
+  <button onclick="go(4)">Yes</button>
+  <button class="secondary" onclick="handleNo()">No</button>
+</div>
+
+<!-- No flow -->
+<div class="section" id="s4">
+  <h1 id="noText"></h1>
+  <img class="gif" src="gifs/angry.gif">
+  <button onclick="go(5)">Yes</button>
+  <button class="secondary" id="noBtn" onclick="handleNo()">No</button>
+</div>
+
+<!-- Yes -->
+<div class="section" id="s5">
+  <h1>yayyyy i knew it, u made me sooo happyyyy😘😘</h1>
+  <img class="gif" src="gifs/happy.gif">
+  <button onclick="go(6)">want your gifts</button>
+</div>
+
+<!-- 6 -->
+<div class="section" id="s6">
+  <h1>ami achi abr kiser gift er dorkar tor???😡</h1>
+  <img class="gif" src="gifs/annoyed.gif">
+  <button onclick="go(7)">proceed</button>
+</div>
+
+<!-- 7 -->
+<div class="section" id="s7">
+  <h1>thik hai le lo dahej</h1>
+  <img class="gif" src="gifs/gift.gif">
+  <button onclick="go(8)">Gift 1</button>
+  <button onclick="go(9)">Gift 2</button>
+  <button onclick="go(10)">Gift 3</button>
+</div>
+
+<!-- BMW -->
+<div class="section" id="s8">
+  <h1>BMW 😌</h1>
+  <img src="images/bmw.jpg">
+  <button onclick="go(7)">Back</button>
+</div>
+
+<!-- Rolex -->
+<div class="section" id="s9">
+  <h1>Rolex ⌚</h1>
+  <img src="images/rolex.jpg">
+  <button onclick="go(7)">Back</button>
+</div>
+
+<!-- Bvlgari -->
+<div class="section" id="s10">
+  <h1>Bvlgari Wallet ✨</h1>
+  <img src="images/bvlgari.jpg">
+  <button onclick="go(11)">let’s be serious now</button>
+</div>
+
+<!-- Hug -->
+<div class="section" id="s11">
+  <h1>Even we are miles apart, I am sending you a virtual hug</h1>
+  <img src="images/hug.jpg">
+  <button onclick="go(12)">Next</button>
+</div>
+
+<!-- Adore -->
+<div class="section" id="s12">
+  <h1>i love to adore you knowing you are just mine and no body will dare to make you against me</h1>
+  <img src="images/adore.jpg">
+  <button onclick="startSong()">Gift 3</button>
+</div>
+
+<!-- What -->
+<div class="section" id="s13">
+  <h1>Okay now you must be lucky enough that you have got the best gift in the world🤭</h1>
+  <button onclick="go(14)">what??</button>
+</div>
+
+<!-- Agree -->
+<div class="section" id="s14">
+  <img src="images/agree.jpg">
+  <br>
+  <button onclick="agree()">Agree</button>
+  <button id="notAgreeBtn" class="secondary" onclick="notAgree()">Not agree</button>
+  <p id="naText"></p>
+</div>
+
+<!-- Ego -->
+<div class="section" id="s15">
+  <h1>I know I am the best😎</h1>
+  <button onclick="go(16)">Next</button>
+</div>
+
+<!-- OliVeer -->
+<div class="section" id="s16">
+  <h1>choosing you is still the best option for me🌹</h1>
+  <img src="images/oliveer.jpg">
+  <h1 class="romantic">#OliVeer🤍</h1>
+  <button onclick="go(17)">Next</button>
+</div>
+
+<!-- ===== FINAL VALENTINE + PROPOSAL (#6) ===== -->
+<div class="section" id="s17">
+  <h1 class="romantic">Happy Valentine’s Day my love</h1>
+  <button onclick="go(18)">Next 💖</button>
+</div>
+
+<div class="section" id="s18">
+  <h1 class="romantic">So… will you stay mine forever? 🥺💍</h1>
+  <button onclick="go(19)">Yes</button>
+  <button onclick="go(19)">Of course yes 😏</button>
+</div>
+
+<div class="section" id="s19">
+  <h1 class="romantic">Then it’s official… you’re stuck with me 🤍</h1>
+  <button onclick="closeMsg()">Finish💖</button>
+</div>
+
+<script>
+let noCount=0;
+
+function go(n){
+  document.querySelectorAll('.section')
+    .forEach(s=>s.classList.remove('active'));
+
+  document.getElementById('s'+n).classList.add('active');
+
+  if(n===17){
+    startCelebration();   // hearts + petals + confetti start here
+  }
+}
+
+function handleNo(){
+  noCount++;
+  go(4);
+
+  if(noCount===1){
+    noText.innerText="Besi hoche nh tor, ragas nh amai";
+  }
+  else if(noCount===2){
+    noText.innerText="ekk chor khabi kintu chup chap yes kor";
+  }
+  else{
+    noText.innerText="besi smart hos na, juicy juicy momos and tor friend k miss korbi kintu dekhe ne";
+    noBtn.style.position="absolute";
+    noBtn.onmouseover=()=>{
+        const x=Math.random()*(window.innerWidth-120);
+        const y=Math.random()*(window.innerHeight-60);
+           noBtn.style.left=x+"px";
+           noBtn.style.top=y+"px";
+    };
+  }
+}
+
+/* ===== MUSIC FADE-IN (#3) ===== */
+function startSong(){
+  let audio=document.getElementById("song");
+  audio.volume=0;
+  audio.play();
+
+  let vol=0;
+  let fade=setInterval(()=>{
+    if(vol<1){
+      vol+=0.05;
+      audio.volume=vol;
+    }else clearInterval(fade);
+  },200);
+
+  go(13);
+}
+
+function notAgree(){
+  naText.innerText="abr natok korbi nh chup chap haa kor";
+  notAgreeBtn.style.display="none";
+}
+
+function agree(){ go(15); }
+
+/* ===== BETTER CELEBRATION (#7) ===== */
+function startCelebration(){
+  // hearts
+  for(let i=0;i<35;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💖";
+    h.style.left=Math.random()*100+"%";
+    h.style.animationDuration=(4+Math.random()*3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),7000);
+  }
+
+  // rose petals
+  for(let i=0;i<25;i++){
+    let p=document.createElement("div");
+    p.className="petals";
+    p.innerText="🌹";
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDuration=(5+Math.random()*3)+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),8000);
+  }
+
+  // confetti
+  for(let i=0;i<30;i++){
+    let c=document.createElement("div");
+    c.style.position="fixed";
+    c.style.top="-10px";
+    c.style.left=Math.random()*100+"%";
+    c.style.width="8px";
+    c.style.height="8px";
+    c.style.borderRadius="50%";
+    c.style.backgroundColor=["#ff7aa2","#ffd1dc","#ffc0cb"][Math.floor(Math.random()*3)];
+    c.style.animation=`confettiFall ${4+Math.random()*3}s linear`;
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),7000);
+  }
+}
+
+/* ===== BEST POSSIBLE TAB CLOSE ===== */
+function closeMsg(){
+  // Try to close the tab
+  window.open("about:blank", "_self");
+  window.close();
+
+  // Fallback ONLY if browser blocks it
+  setTimeout(()=>{
+    alert("If it didn’t close automatically, please close the tab 🤍");
+  }, 400);
+}
+
+</script>
+
+</body>
+</html>
